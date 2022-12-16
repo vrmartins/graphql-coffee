@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { MinLength } from 'class-validator';
+import { Flavor } from 'src/coffees/entities/flavor.entity';
 
 @InputType()
 export class CreateCoffeeInput {
