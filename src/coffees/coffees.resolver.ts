@@ -1,5 +1,13 @@
 import { ParseIntPipe } from '@nestjs/common';
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  ID,
+  Mutation,
+  Query,
+  Resolver,
+  Subscription,
+} from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeInput } from './dto/create-coffee.input/create-coffee.input';
 import { UpdateCoffeeInput } from './dto/update-coffee.input/update-coffee.input';
@@ -7,7 +15,10 @@ import { Coffee } from './entities/coffee.entity';
 
 @Resolver()
 export class CoffeesResolver {
-  constructor(private readonly coffeesServices: CoffeesService) {}
+  constructor(
+    private readonly coffeesServices: CoffeesService,
+    private readonly pubSub: PubSub,
+  ) {}
 
   @Query(() => [Coffee], { name: 'coffees' })
   async findAll() {
@@ -37,5 +48,10 @@ export class CoffeesResolver {
   @Mutation(() => Coffee, { name: 'removeCoffee' })
   async remove(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
     return this.coffeesServices.remove(id);
+  }
+
+  @Subscription(() => Coffee)
+  coffeeAdded() {
+    return this.pubSub.asyncIterator('coffeeAdded');
   }
 }
