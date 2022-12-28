@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Drink } from 'src/common/interfaces/drink.interface/drink.interface';
+import { CoffeeType } from 'src/common/enums/coffee-type.enum';
+import { Drink } from 'src/common/interfaces/drink.interface';
 import {
   Column,
   CreateDateColumn,
@@ -29,4 +30,7 @@ export class Coffee {
 
   @CreateDateColumn()
   createdAt?: Date;
+
+  @Column({ nullable: true })
+  type?: CoffeeType;
 }

@@ -1,5 +1,5 @@
 import { ObjectType } from '@nestjs/graphql';
-import { Drink } from 'src/common/interfaces/drink.interface/drink.interface';
+import { Drink } from 'src/common/interfaces/drink.interface';
 
 @ObjectType({
   implements: () => Drink,
