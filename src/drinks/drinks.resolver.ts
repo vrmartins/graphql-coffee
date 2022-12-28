@@ -1,7 +1,7 @@
 import { Query, Resolver } from '@nestjs/graphql';
 import { Coffee } from 'src/coffees/entities/coffee.entity';
 import { Drink } from 'src/common/interfaces/drink.interface/drink.interface';
-import { Tea } from 'src/teas/entities/tea.entity/tea.entity';
+import { Tea } from 'src/teas/entities/tea.entity';
 
 @Resolver() // 👈 represents that every FieldResolver represents the Drink type
 export class DrinksResolver {
